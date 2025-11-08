@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Nosso modelo de dados, espelhando o contrato
+model Job {
+  id              Int      @id // O JobId do contrato
+  txHash    String
+  status    String  // "Open", "InProgress", "PendingApproval", "Completed"
+  requester String
+  provider  String? // Opcional, pois começa nulo
+  dataUrl   String  // O link do IPFS
+  scriptUrl String
+  resultUrl String? // Opcional, pois começa nulo
+  rewardUsd String
+  rewardEth String
+}
+
+
