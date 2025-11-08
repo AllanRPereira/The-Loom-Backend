@@ -101,8 +101,7 @@ async function main() {
   // --- Ouvinte de Evento: JobResultSubmitted ---
   contract.on("JobResultSubmitted", async (jobId, providerAddr, resultUrl, event) => {
     const id = Number(jobId);
-    const txHash = event.log.transactionHash;
-    console.log(`[Evento] JobResultSubmitted: #${id} tx=${txHash}`);
+    console.log(`[Evento] JobResultSubmitted: #${id}`);
     try {
       await prisma.job.update({
         where: { id: id },
@@ -119,8 +118,7 @@ async function main() {
   // --- Ouvinte de Evento: JobApproved ---
   contract.on("JobApproved", async (jobId, event) => {
     const id = Number(jobId);
-    const txHash = event.log.transactionHash;
-    console.log(`[Evento] JobApproved: #${id} tx=${txHash}`);
+    console.log(`[Evento] JobApproved: #${id}`);
     try {
       await prisma.job.update({
         where: { id: id },
