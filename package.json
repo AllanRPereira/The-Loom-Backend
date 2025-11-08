@@ -12,6 +12,10 @@
     "start:indexer": "node --loader ts-node/esm lib/indexer.ts"
   },
   "dependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
     "@prisma/client": "^6.19.0",
     "dotenv": "^17.2.3",
     "ethers": "^6.15.0",
