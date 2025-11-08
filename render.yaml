@@ -1,0 +1,46 @@
+services:
+  # Serviço da API Next.js
+  - type: web
+    name: loom-backend-api
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SCROLL_SEPOLIA_WSS_RPC_URL
+        sync: false
+      - key: NEXT_PUBLIC_CONTRACT_ADDRESS
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+  # Serviço do Indexer (background worker)
+  - type: worker
+    name: loom-backend-indexer
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm run start:indexer
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SCROLL_SEPOLIA_WSS_RPC_URL
+        sync: false
+      - key: NEXT_PUBLIC_CONTRACT_ADDRESS
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+databases:
+  - name: loom-db
+    databaseName: loom
+    plan: free
+    region: oregon

@@ -1,6 +1,10 @@
 // app/lib/indexer.ts
 import * as dotenv from 'dotenv';
-dotenv.config(); // Carrega o arquivo .env padrão
+
+// Em produção, o Render já injeta as variáveis de ambiente
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config(); // Carrega o arquivo .env padrão apenas em desenvolvimento
+}
 
 import { ethers } from "ethers";
 // Esta importação agora funcionará após o 'prisma generate'
